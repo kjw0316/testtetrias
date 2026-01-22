@@ -49,7 +49,7 @@ public class Tetristry : MonoBehaviour
 
             if (!ValidMove())
             {
-                transform.position += new Vector3(0, -1, 0);
+                transform.position -= new Vector3(0, -1, 0);
                 AddToGrid();
                 CheckForLines();
                 this.enabled = false;
