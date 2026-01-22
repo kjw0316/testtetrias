@@ -600,4 +600,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c8a556e5f36104ba339302624a0364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tetristry
+  fallTime: 1
   rotationPoint: {x: 0, y: 0, z: 0}
