@@ -14,6 +14,7 @@ public class TitleUI : TitleCommanderChildBase
     private void OnStartButtonClicked()
     {
         _titleCommander.StartGame();
+        Tetristry.score = 0;
     }
 
 }

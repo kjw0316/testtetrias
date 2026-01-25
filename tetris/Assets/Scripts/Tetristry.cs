@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VectorGraphics;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Tetristry : MonoBehaviour
 {
@@ -10,7 +13,9 @@ public class Tetristry : MonoBehaviour
     public static int width = 10;
     public static int height = 20;
 
-    private static Transform[,] grid = new Transform[width, height];
+    public static int score = 0;
+
+    private static UnityEngine.Transform[,] grid = new UnityEngine.Transform[width, height];
 
     public Vector3 rotationPoint;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -54,6 +59,11 @@ public class Tetristry : MonoBehaviour
                 CheckForLines();
                 this.enabled = false;
                 FindObjectOfType<Spawn>().SpawnTetrimino();
+                score += 10;
+            }
+            if (GameOver())
+            {
+                Managers.Game.SetState(GameState.Result);
             }
             previousTime = Time.time;
         }
@@ -110,7 +120,7 @@ public class Tetristry : MonoBehaviour
 
     void AddToGrid()
     {
-        foreach(Transform children in transform)
+        foreach(UnityEngine.Transform children in transform)
         {
             int roundedX = Mathf.RoundToInt(children.transform.position.x);
             int roundedY = Mathf.RoundToInt(children.transform.position.y);
@@ -120,7 +130,7 @@ public class Tetristry : MonoBehaviour
 
     bool ValidMove()
     {
-        foreach (Transform children in transform)
+        foreach (UnityEngine.Transform children in transform)
         { 
             int roundedX = Mathf.RoundToInt(children.transform.position.x);
             int roundedY = Mathf.RoundToInt(children.transform.position.y);
@@ -135,6 +145,22 @@ public class Tetristry : MonoBehaviour
             }
         }
         return true;
+    }
+
+    bool GameOver()
+    {
+        foreach (UnityEngine.Transform children in transform)
+        {
+            int roundedX = Mathf.RoundToInt(children.transform.position.x);
+            int roundedY = Mathf.RoundToInt(children.transform.position.y);
+
+            if (roundedX >= 6.5 || score >= 10000)
+            {
+                return true;
+            }
+        }
+        return false;
+
     }
 
 }
